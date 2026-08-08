@@ -11,10 +11,23 @@ export async function GET(request: Request) {
     const type = params.get("type") === "audio" ? "audio" : "video";
     const extension = type === "audio" ? "mp3" : "mp4";
     const safeName = (params.get("name") || "zavera-download").replace(/[^a-z0-9_-]/gi, "-").slice(0, 80);
-    const upstream = await fetch(source, { headers: { "User-Agent": "Mozilla/5.0", Referer: "https://www.tiktok.com/" }, cache: "no-store", signal: AbortSignal.timeout(30_000) });
+    const upstream = await fetch(source, {
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        Referer: "https://www.tiktok.com/",
+        Accept: type === "audio" ? "audio/mpeg,audio/*;q=0.9,*/*;q=0.8" : "video/mp4,video/*;q=0.9,*/*;q=0.8",
+      },
+      cache: "no-store",
+      signal: AbortSignal.timeout(30_000),
+    });
     if (!upstream.ok || !upstream.body) return new Response("Media is no longer available. Please prepare the video again.", { status: 502 });
 
-    const headers = new Headers({ "Content-Type": upstream.headers.get("content-type") || `${type}/${extension}`, "Content-Disposition": `attachment; filename="${safeName}.${extension}"`, "Cache-Control": "private, no-store" });
+    const headers = new Headers({ "Content-Type": upstream.headers.get("content-type") || (type === "audio" ? "audio/mpeg" : "video/mp4"), "Content-Disposition": `attachment; filename="${safeName}.${extension}"`, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" });
+    if (type === "audio") {
+      const audio = await upstream.arrayBuffer();
+      headers.set("Content-Length", String(audio.byteLength));
+      return new Response(audio, { status: 200, headers });
+    }
     const length = upstream.headers.get("content-length");
     if (length) headers.set("Content-Length", length);
     return new Response(upstream.body, { status: 200, headers });

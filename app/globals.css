@@ -33,8 +33,6 @@ h1 em { font-style:normal; color:#729520; position:relative; }
 .input-row button:hover { background:var(--mint-strong); transform:translateY(-1px); }
 .input-row button:disabled { cursor:wait; opacity:.7; transform:none; }
 .input-row button span { margin-left:7px; }
-.permission-check { display:flex!important; align-items:flex-start; gap:9px; margin:13px 4px 0!important; color:#536b68; font-size:11px!important; font-weight:500!important; line-height:1.4; cursor:pointer; }
-.permission-check input { width:15px; height:15px; margin:0; accent-color:#78991e; flex:0 0 auto; }
 .form-meta { display:flex; gap:24px; margin:13px 4px 0; color:#69807d; font-size:11px; }
 .form-meta span::first-letter { color:#779918; }
 .notice { margin:12px 4px 0; padding:10px 12px; border-radius:8px; background:#f0f6df; color:#526a37; font-size:12px; }

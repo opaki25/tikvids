@@ -33,7 +33,6 @@ function fileLink(src: string, name: string, type: string) {
 
 export default function Home() {
   const [url, setUrl] = useState("");
-  const [authorized, setAuthorized] = useState(false);
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(false);
   const [video, setVideo] = useState<VideoResult | null>(null);
@@ -46,11 +45,6 @@ export default function Home() {
       setNotice("Please paste a valid TikTok video link.");
       return;
     }
-    if (!authorized) {
-      setNotice("Please confirm that you own the video or have permission to download it.");
-      return;
-    }
-
     setLoading(true);
     setNotice("Finding the best available versions…");
     try {
@@ -92,7 +86,6 @@ export default function Home() {
               <div className="url-field"><span aria-hidden="true">↗</span><input id="tiktok-url" type="url" value={url} onChange={(event) => { setUrl(event.target.value); setNotice(""); }} placeholder="https://www.tiktok.com/@creator/video/..." autoComplete="url" /></div>
               <button type="submit" disabled={loading}>{loading ? "Finding…" : "Find video"} <span aria-hidden="true">↓</span></button>
             </div>
-            <label className="permission-check"><input type="checkbox" checked={authorized} onChange={(event) => setAuthorized(event.target.checked)} /><span>I own this video or have the creator’s permission to download it.</span></label>
             <div className="form-meta"><span>✓ High-quality MP4</span><span>✓ No account needed</span><span>✓ Links are not stored</span></div>
             {notice && <p className="notice" role="status">{notice}</p>}
           </form>
@@ -107,7 +100,7 @@ export default function Home() {
           <div className="result-actions">
             {video.downloads.hd && <a className="download-primary" href={fileLink(video.downloads.hd, `zavera-${video.id}-hd`, "video")}>Download HD <span>↓</span></a>}
             <a href={fileLink(video.downloads.standard, `zavera-${video.id}`, "video")}>Standard MP4 <span>↓</span></a>
-            {video.downloads.audio && <a href={fileLink(video.downloads.audio, `zavera-${video.id}`, "audio")}>Audio MP3 <span>↓</span></a>}
+            {video.downloads.audio && <a href={fileLink(video.downloads.audio, `zavera-${video.id}`, "audio")} download={`zavera-${video.id}.mp3`}>Audio MP3 <span>↓</span></a>}
           </div>
         </section>
       )}
