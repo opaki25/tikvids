@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import AdSlot from "@/components/AdSlot";
 
 type VideoResult = {
   id: string;
@@ -92,6 +93,8 @@ export default function Home() {
         </div>
       </section>
 
+      <AdSlot placement="after-hero" format="horizontal" slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP} />
+
       {video && (
         <section className="result shell" id="result" aria-live="polite">
           <img className="result-cover" src={video.cover} alt={`Cover for ${video.title}`} />
@@ -104,12 +107,14 @@ export default function Home() {
         </section>
       )}
 
-      <aside className="ad-slot shell" aria-label="Advertisement"><span>ADVERTISEMENT</span><p>Your ad could be here</p></aside>
+      <AdSlot placement="after-result" slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_RESULT} />
 
       <section className="how shell" id="how">
         <div className="section-heading"><span className="kicker">THREE EASY STEPS</span><h2>From TikTok to your camera roll.</h2><p>No apps to install. No confusing menus. Just paste, tap, and save.</p></div>
         <div className="steps">{steps.map(([number, title, body]) => <article className="step" key={number}><span className="step-number">{number}</span><div className="step-icon" aria-hidden="true">{number === "01" ? "⌁" : number === "02" ? "↗" : "↓"}</div><h3>{title}</h3><p>{body}</p></article>)}</div>
       </section>
+
+      <AdSlot placement="between-sections" format="horizontal" slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_MIDDLE} />
 
       <section className="features"><div className="shell feature-grid"><div><span>◈</span><h3>Quality stays crisp</h3><p>Get the best available version of your authorized video.</p></div><div><span>⌁</span><h3>Works everywhere</h3><p>Phone, tablet, or desktop—nothing extra to install.</p></div><div><span>◎</span><h3>Your links stay private</h3><p>We don’t keep a history of the links you submit.</p></div></div></section>
 
@@ -119,6 +124,8 @@ export default function Home() {
         <details><summary>Does Zavera provide videos without a watermark?<b>+</b></summary><p>When an authorized clean version is available, Zavera offers it. You remain responsible for respecting the creator’s rights and attribution requirements.</p></details>
         <details><summary>Do you store my links or videos?<b>+</b></summary><p>No download history is kept. Links are processed only long enough to prepare the available download options.</p></details>
       </section>
+
+      <AdSlot placement="before-footer" format="horizontal" slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM} />
 
       <footer><div className="shell footer-inner"><a className="brand" href="#top"><Brand /></a><p>Download responsibly. Respect creators.</p><div><a href="#faq">Terms</a><a href="#faq">Privacy</a><a href="#faq">Copyright</a></div></div></footer>
     </main>

@@ -45,9 +45,12 @@ h1 em { font-style:normal; color:#729520; position:relative; }
 .result-actions { display:flex; flex-direction:column; gap:7px; min-width:170px; }
 .result-actions a { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border:1px solid #d5ded7; border-radius:9px; color:#3c5b57; font-size:12px; font-weight:700; }
 .result-actions .download-primary { border-color:var(--mint); background:var(--mint); color:#173835; }
-.ad-slot { height:86px; margin-top:20px; margin-bottom:74px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px dashed #cad4cf; border-radius:11px; color:#9caaa7; background:#fafbf9; }
+.ad-slot { width:min(1120px,calc(100% - 40px)); min-height:120px; margin:42px auto 64px; padding:12px; display:flex; flex-direction:column; align-items:stretch; justify-content:center; border:1px dashed #cad4cf; border-radius:11px; color:#9caaa7; background:#fafbf9; overflow:hidden; }
+.ad-slot-horizontal { min-height:112px; }
+.ad-slot-auto { min-height:250px; }
 .ad-slot span { font-size:9px; letter-spacing:1.4px; }
-.ad-slot p { margin:7px 0 0; font-size:12px; }
+.ad-slot p { margin:20px 0; text-align:center; font-size:12px; }
+.adsbygoogle { width:100%; min-height:90px; margin-top:8px; }
 .how { padding:0 0 88px; }
 .section-heading { text-align:center; max-width:570px; margin:0 auto 45px; }
 .section-heading h2,.faq h2 { margin:12px 0 10px; font:800 clamp(32px,4vw,44px)/1.1 "Manrope",sans-serif; letter-spacing:-2px; }
