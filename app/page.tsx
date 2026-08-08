@@ -70,7 +70,6 @@ export default function Home() {
       <header className="nav shell">
         <a className="brand" href="#top" aria-label="Zavera home"><Brand /></a>
         <nav aria-label="Main navigation"><a href="#how">How it works</a><a href="#faq">FAQ</a></nav>
-        <a className="nav-cta" href="#download">Download now</a>
       </header>
 
       <section className="hero" id="top">

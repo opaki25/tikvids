@@ -11,7 +11,6 @@ a { color:inherit; text-decoration:none; }
 .brand-lockup { display:flex; gap:8px; align-items:center; font:800 24px/1 "Manrope",sans-serif; letter-spacing:-1.5px; color:#032f2e; }
 .brand-lockup img { width:35px; height:35px; object-fit:contain; }
 .nav nav { display:flex; gap:38px; color:#405e5b; font-size:14px; font-weight:600; }
-.nav-cta { padding:11px 18px; border:1px solid #cbd7d2; border-radius:10px; font-size:14px; font-weight:700; }
 .hero { position:relative; overflow:hidden; min-height:575px; background:radial-gradient(circle at 50% -20%,#fff 0,#f3f7ed 60%,#edf3e7 100%); border-top:1px solid #eff2ed; }
 .hero-inner { position:relative; z-index:1; text-align:center; padding:65px 0 43px; }
 .hero-glow { position:absolute; border-radius:999px; filter:blur(5px); opacity:.55; }
