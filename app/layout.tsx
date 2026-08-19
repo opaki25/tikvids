@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const requestHeaders = await headers();
-  const host = requestHeaders.get("x-forwarded-host") || requestHeaders.get("host") || "localhost:3000";
-  const protocol = requestHeaders.get("x-forwarded-proto") || (host.startsWith("localhost") ? "http" : "https");
-  const metadataBase = new URL(`${protocol}://${host}`);
+const siteUrl = "https://www.zavera.site";
 
-  return {
-    metadataBase,
-    title: "Zavera — Save TikTok Videos",
-    description: "Save your own or authorized TikTok videos quickly, privately, and in high quality.",
-    icons: { icon: "/zavera-icon.png", apple: "/zavera-icon.png" },
-    openGraph: { title: "Zavera — Save the videos you love.", description: "Fast, free TikTok video downloads for content you own or have permission to use.", type: "website", images: [{ url: "/og.png", width: 1200, height: 630, alt: "Zavera — Save the videos you love." }] },
-    twitter: { card: "summary_large_image", title: "Zavera — Save the videos you love.", description: "Fast, free TikTok video downloads for authorized content.", images: ["/og.png"] },
-  };
-}
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: { default: "TikTok Video Downloader – HD MP4 & MP3 | Zavera", template: "%s | Zavera" },
+  description: "Download TikTok videos online in HD MP4 or save TikTok audio as MP3 with Zavera. Fast, free, private, and no app or account required.",
+  applicationName: "Zavera",
+  keywords: ["Zavera", "TikTok video downloader", "download TikTok videos", "TikTok downloader", "TikTok MP4", "TikTok MP3 downloader"],
+  alternates: { canonical: "/" },
+  authors: [{ name: "Zavera", url: siteUrl }],
+  creator: "Zavera",
+  publisher: "Zavera",
+  category: "technology",
+  manifest: "/manifest.webmanifest",
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
+  icons: { icon: "/zavera-icon.png", apple: "/zavera-icon.png" },
+  openGraph: { title: "TikTok Video Downloader – HD MP4 & MP3 | Zavera", description: "Download TikTok videos online in HD MP4 or save audio as MP3. Fast, free, and no sign-up required.", url: siteUrl, siteName: "Zavera", type: "website", locale: "en_US", images: [{ url: "/og.png", width: 1200, height: 630, alt: "Zavera TikTok video downloader" }] },
+  twitter: { card: "summary_large_image", title: "TikTok Video Downloader | Zavera", description: "Download TikTok videos in HD MP4 or save audio as MP3—fast and free.", images: ["/og.png"] },
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;

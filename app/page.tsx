@@ -18,6 +18,39 @@ const steps = [
   ["03", "Save your video", "Choose HD, standard MP4, or audio and save it."],
 ];
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.zavera.site/#website",
+      url: "https://www.zavera.site/",
+      name: "Zavera",
+      description: "A fast online TikTok video downloader for HD MP4 videos and MP3 audio.",
+      inLanguage: "en",
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://www.zavera.site/#app",
+      name: "Zavera TikTok Video Downloader",
+      url: "https://www.zavera.site/",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires a modern web browser and internet connection",
+      description: "Download public TikTok videos as HD MP4 or save available audio as MP3.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      isAccessibleForFree: true,
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.zavera.site/#organization",
+      name: "Zavera",
+      url: "https://www.zavera.site/",
+      logo: "https://www.zavera.site/zavera-icon.png",
+    },
+  ],
+};
+
 function Brand() {
   return (
     <span className="brand-lockup">
@@ -68,6 +101,7 @@ export default function Home() {
 
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <header className="nav shell">
         <a className="brand" href="#top" aria-label="Zavera home"><Brand /></a>
         <nav aria-label="Main navigation"><a href="#how">How it works</a><a href="#faq">FAQ</a></nav>
@@ -77,8 +111,8 @@ export default function Home() {
         <div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" />
         <div className="shell hero-inner">
           <div className="eyebrow"><span>●</span> FAST · FREE · NO SIGN-UP</div>
-          <h1>Save the videos<br />you <em>love.</em></h1>
-          <p className="hero-copy">Download your own or authorized TikTok videos in high quality. Simple, quick, and made for every device.</p>
+          <h1>TikTok video downloader<br /><em>fast &amp; free.</em></h1>
+          <p className="hero-copy">Download TikTok videos online in high-quality MP4 or save available audio as MP3. No app, account, or installation required.</p>
 
           <form className="download-card" id="download" onSubmit={submit} noValidate>
             <label htmlFor="tiktok-url">Paste your TikTok link</label>
@@ -118,16 +152,29 @@ export default function Home() {
 
       <section className="features"><div className="shell feature-grid"><div><span>◈</span><h3>Quality stays crisp</h3><p>Get the best available version of your authorized video.</p></div><div><span>⌁</span><h3>Works everywhere</h3><p>Phone, tablet, or desktop—nothing extra to install.</p></div><div><span>◎</span><h3>Your links stay private</h3><p>We don’t keep a history of the links you submit.</p></div></div></section>
 
+      <section className="seo-copy shell" aria-labelledby="about-zavera">
+        <div>
+          <span className="kicker">ONLINE TIKTOK DOWNLOADER</span>
+          <h2 id="about-zavera">Download TikTok videos with Zavera</h2>
+        </div>
+        <div className="seo-columns">
+          <p>Zavera is a browser-based TikTok video downloader built for quick, straightforward saving. Paste a public TikTok video link and choose the best available format: HD MP4, standard MP4, or MP3 audio. There is no software to install and no Zavera account to create.</p>
+          <p>The downloader works on Android phones, iPhones, tablets, Windows PCs, Macs, and other devices with a modern browser. Zavera processes the link when you request a download and does not keep a download history. Only save videos you created or have permission to use.</p>
+        </div>
+      </section>
+
       <section className="faq shell" id="faq">
         <span className="kicker">GOOD TO KNOW</span><h2>Questions, answered.</h2>
         <details><summary>Can I download any TikTok video?<b>+</b></summary><p>Zavera handles public links. Only download videos you created or have clear permission to use. Private and unavailable videos cannot be processed.</p></details>
         <details><summary>Does Zavera provide videos without a watermark?<b>+</b></summary><p>When an authorized clean version is available, Zavera offers it. You remain responsible for respecting the creator’s rights and attribution requirements.</p></details>
         <details><summary>Do you store my links or videos?<b>+</b></summary><p>No download history is kept. Links are processed only long enough to prepare the available download options.</p></details>
+        <details><summary>Can I download TikTok videos on iPhone or Android?<b>+</b></summary><p>Yes. Zavera runs in your mobile browser, so no separate downloader app is needed. Paste the public TikTok link, prepare the video, and choose an available format.</p></details>
+        <details><summary>Can Zavera save TikTok audio as MP3?<b>+</b></summary><p>Yes, when an audio track is available for the public video, the results include an Audio MP3 download option.</p></details>
       </section>
 
       <AdSlot placement="before-footer" format="horizontal" slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM} />
 
-      <footer><div className="shell footer-inner"><a className="brand" href="#top"><Brand /></a><p>Download responsibly. Respect creators.</p><div><a href="#faq">Terms</a><a href="#faq">Privacy</a><a href="#faq">Copyright</a></div></div></footer>
+      <footer><div className="shell footer-inner"><a className="brand" href="#top"><Brand /></a><p>Download responsibly. Respect creators.</p><div><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/copyright">Copyright</a></div></div></footer>
     </main>
   );
 }
