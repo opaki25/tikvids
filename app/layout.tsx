@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 
 const siteUrl = "https://www.zavera.site";
@@ -26,9 +25,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
   return (
     <html lang="en">
+      <head>
+        {adClient && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossOrigin="anonymous" />}
+      </head>
       <body>
         {children}
-        {adClient && <Script async strategy="afterInteractive" src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossOrigin="anonymous" />}
       </body>
     </html>
   );
